@@ -1,0 +1,76 @@
+<section class="hero">
+    <div class="eyebrow">UCV 2010 reboot</div>
+    <div>
+        <h1>Proyecto 1</h1>
+        <p>
+            This is a rebuild of the old Homer dial puzzle I first tried to make in Java back in 2010.
+            Click a dial, switch between the two rule sets, and see what the solver says is the shortest way out.
+        </p>
+    </div>
+
+    <div class="summary">
+        <div class="card">
+            <span>Mode</span>
+            <strong>{{ mode.label }}</strong>
+        </div>
+        <div class="card">
+            <span>Best case</span>
+            <strong>{{ analysis.minimalMoves }}</strong>
+        </div>
+        <div class="card">
+            <span>Shortest routes</span>
+            <strong>{{ analysis.solutionCount }}</strong>
+        </div>
+        <div class="card">
+            <span>One route</span>
+            <strong>{{ solutionPath is empty ? 'Solved' : solutionPath|join(' -> ') }}</strong>
+        </div>
+    </div>
+</section>
+
+<section class="layout">
+    <aside class="panel">
+        <h2>Mode</h2>
+        <div class="mode-list">
+            {% for choice in modes %}
+                <form class="mode-form" method="post" action="{{ path('app_puzzle_mode') }}">
+                    <input type="hidden" name="mode" value="{{ choice.value }}">
+                    <button class="mode-button{{ choice == mode ? ' active' : '' }}" type="submit">
+                        <strong>{{ choice.label }}</strong>
+                        <span>{{ choice.description }}</span>
+                    </button>
+                </form>
+            {% endfor %}
+        </div>
+
+        <h2 style="margin-top: 1.4rem;">Actions</h2>
+        <div class="actions">
+            <form method="post" action="{{ path('app_puzzle_reset') }}">
+                <button class="reset-button" type="submit">Back to the original mess</button>
+            </form>
+        </div>
+
+        {% if isSolved %}
+            <div class="status">All dials aligned</div>
+        {% endif %}
+    </aside>
+
+    <section class="panel">
+        <h2>The board</h2>
+        <div class="dial-grid">
+            {% for dial in dials %}
+                <form class="dial-form" method="post" action="{{ path('app_puzzle_move', {index: dial.index}) }}">
+                    <button class="dial-button" type="submit">
+                        <div class="dial-meta">
+                            <strong>Dial {{ dial.label }}</strong>
+                            <span>State {{ dial.position }}</span>
+                        </div>
+                        <img src="/images/puzzle/{{ dial.image }}" alt="Dial {{ dial.label }} in state {{ dial.position }}">
+                    </button>
+                </form>
+            {% endfor %}
+        </div>
+
+        <p class="state-code">Current state <strong>{{ positions|join('-') }}</strong></p>
+    </section>
+</section>
