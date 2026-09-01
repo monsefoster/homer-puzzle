@@ -2,7 +2,7 @@
 
 This repo is me going back to something that had been bothering me for a very long time.
 
-In 2010, while I was a student at UJAP, I used to spend part of my holidays looking at assignments from the Universidad Central de Venezuela, Facultad de Ciencias, Escuela de Computacion. I thought their programming assignments were more interesting than the ones I had around me, so I would try to build some of them for fun.
+In 2010, while I was a student at UJAP, I used to spend part of my holidays looking at assignments from the UCV (Facultad de Ciencias, Escuela de Computacion). I thought their programming assignments were more interesting than the ones I had around me, so I would try to build some of them for fun.
 
 This puzzle was one of those projects. I tried to make it in Java Swing and got close, but I never finished it because of a bug I could not explain back then. The first images behaved fine, then later ones started acting strangely, and that was the end of it for years.
 
